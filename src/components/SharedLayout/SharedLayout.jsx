@@ -1,25 +1,24 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Container, Header, Logo, Link } from './SharedLayout.styled';
+import { Container, Header, Link, HR } from './SharedLayout.styled';
+import { Section } from 'components/Section/Section.styled';
 
 export default function SharedLayout() {
   return (
     <Container>
       <Header>
-        <Logo>
-          <span role="img" aria-label="computer icon">
-            💻
-          </span>{' '}
-          Movies search
-        </Logo>
         <nav>
           <Link to="/" end>
             Home
           </Link>
-          <Link to="/about">About</Link>
-          <Link to="/products">Products</Link>
+          <Link to="/movies">Movies</Link>
         </nav>
       </Header>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Section>
+          <Outlet />
+        </Section>
+      </Suspense>
     </Container>
   );
 }
