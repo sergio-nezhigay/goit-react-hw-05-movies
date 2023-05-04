@@ -38,10 +38,12 @@ export default function MovieDetailsView() {
           {movie && (
             <>
               <Row>
-                <img
-                  src={IMAGES_BASE_URL + movie.poster_path}
-                  alt={movie.title}
-                />
+                {movie.poster_path && (
+                  <img
+                    src={IMAGES_BASE_URL + movie.poster_path}
+                    alt={movie.title}
+                  />
+                )}
                 <Column>
                   <h2>{movie.title}</h2>
                   {!!movie.vote_average && (

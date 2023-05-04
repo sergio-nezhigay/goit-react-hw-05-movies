@@ -15,7 +15,7 @@ export default function Movies() {
 
   useEffect(() => {
     loadMovies(query);
-  }, []);
+  }, [query]);
 
   const onSubmit = ({ query }) => {
     const nextParams = query !== '' ? { query } : {};
@@ -39,11 +39,17 @@ export default function Movies() {
   return (
     <div>
       <SearchBox onSubmit={onSubmit} initialValue={query} />
-      <MovieList
-        movies={movies}
-        location={location}
-        title={query ? `Search results by word "${query}"` : `Enter your query`}
-      />
+      {isLoading ? (
+        <div>Loading the movie...</div>
+      ) : (
+        <MovieList
+          movies={movies}
+          location={location}
+          title={
+            query ? `Search results by word "${query}"` : `Enter your query`
+          }
+        />
+      )}
     </div>
   );
 }
