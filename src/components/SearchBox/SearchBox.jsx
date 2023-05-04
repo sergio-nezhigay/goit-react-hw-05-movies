@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Form, Input } from './SearchBox.styled';
 
 function SearchBox({ onSubmit, initialValue }) {
@@ -20,5 +21,10 @@ function SearchBox({ onSubmit, initialValue }) {
     </Form>
   );
 }
+
+SearchBox.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  initialValue: PropTypes.string,
+};
 
 export default SearchBox;

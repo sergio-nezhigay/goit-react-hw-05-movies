@@ -15,9 +15,11 @@ export default function SharedLayout() {
         </nav>
       </Header>
       <Suspense fallback={<div>Loading the app...</div>}>
-        <Section>
-          <Outlet />
-        </Section>
+        <main>
+          <Section>
+            <Outlet />
+          </Section>
+        </main>
       </Suspense>
     </Container>
   );

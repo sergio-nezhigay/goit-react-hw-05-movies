@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Title, MovieTitle, List, MovieLink } from './MovieList.styled';
 import * as theMovieDbAPI from '../../components/api/themoviedbApi';
 const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w300';
@@ -59,3 +60,15 @@ export default function MovieList({ movies, location, title }) {
     </>
   );
 }
+
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      poster_path: PropTypes.string,
+    })
+  ).isRequired,
+  location: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+};
