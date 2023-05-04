@@ -4,13 +4,13 @@ import * as theMovieDbAPI from '../../components/api/themoviedbApi';
 const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w300';
 
 export default function MovieList({ movies, location, title }) {
-  const [trailerUrl, setTrailerUrl] = useState(null);
+  const [trailer, setTrailer] = useState(null);
 
   const handleMovieHover = async movieId => {
     try {
       const video = await theMovieDbAPI.fetchTrailer(movieId);
       if (video) {
-        setTrailerUrl({ video, movieId });
+        setTrailer({ video, movieId });
       }
     } catch (error) {
       console.error(
@@ -20,7 +20,7 @@ export default function MovieList({ movies, location, title }) {
   };
 
   const handleMovieLeave = () => {
-    setTrailerUrl(null);
+    setTrailer(null);
   };
 
   return (
@@ -36,10 +36,12 @@ export default function MovieList({ movies, location, title }) {
                 onMouseEnter={() => handleMovieHover(movie.id)}
                 onMouseLeave={handleMovieLeave}
               >
-                {trailerUrl &&
-                trailerUrl.movieId === movie.id &&
-                trailerUrl.video ? (
-                  <iframe src={trailerUrl.video} allow="autoplay; " />
+                {trailer && trailer.movieId === movie.id && trailer.video ? (
+                  <iframe
+                    title={movie.title}
+                    src={trailer.video}
+                    allow="autoplay; "
+                  />
                 ) : (
                   movie.poster_path && (
                     <img
@@ -57,31 +59,3 @@ export default function MovieList({ movies, location, title }) {
     </>
   );
 }
-
-// import { Title, List, MovieLink } from './MovieList.styled';
-// const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w300';
-
-// export default function MovieList({ movies, location, title }) {
-//   return (
-//     <>
-//       {!!title.length && <Title>{title}</Title>}
-//       {!!movies.length && (
-//         <List>
-//           {movies.map(movie => (
-//             <li key={movie.id}>
-//               <MovieLink to={`/movies/${movie.id}`} state={{ from: location }}>
-//                 {movie.poster_path && (
-//                   <img
-//                     src={IMAGES_BASE_URL + movie.poster_path}
-//                     alt={movie.title}
-//                   />
-//                 )}
-//                 <div>{movie.title}</div>
-//               </MovieLink>
-//             </li>
-//           ))}
-//         </List>
-//       )}
-//     </>
-//   );
-// }
