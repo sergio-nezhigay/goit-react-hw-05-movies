@@ -20,7 +20,7 @@ export default function Cast() {
 
   useEffect(() => {
     (async () => {
-      if (!movieId) setLoading(true);
+      setLoading(true);
       try {
         const { cast } = await theMovieDbAPI.fetchCast(movieId);
         setCast(cast);
@@ -34,27 +34,33 @@ export default function Cast() {
 
   return (
     <>
-      {cast.length ? (
-        <CastList>
-          {cast.map(actor => (
-            <CastItem key={actor.id}>
-              {actor.profile_path ? (
-                <CastImage
-                  src={IMAGES_BASE_URL + actor.profile_path}
-                  alt={actor.name}
-                />
-              ) : (
-                <CastNoImage />
-              )}
-              <div>
-                <CastName>{actor.name}</CastName>
-                <CastCharacter>as {actor.character}</CastCharacter>
-              </div>
-            </CastItem>
-          ))}
-        </CastList>
+      {isLoading ? (
+        <div>Loading cast...</div>
       ) : (
-        <p>We don't have cast for this movie</p>
+        <>
+          {cast.length ? (
+            <CastList>
+              {cast.map(actor => (
+                <CastItem key={actor.id}>
+                  {actor.profile_path ? (
+                    <CastImage
+                      src={IMAGES_BASE_URL + actor.profile_path}
+                      alt={actor.name}
+                    />
+                  ) : (
+                    <CastNoImage />
+                  )}
+                  <div>
+                    <CastName>{actor.name}</CastName>
+                    <CastCharacter>as {actor.character}</CastCharacter>
+                  </div>
+                </CastItem>
+              ))}
+            </CastList>
+          ) : (
+            <p>We don't have cast for this movie</p>
+          )}
+        </>
       )}
     </>
   );

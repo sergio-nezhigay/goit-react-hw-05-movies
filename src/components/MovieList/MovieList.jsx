@@ -5,9 +5,9 @@ import { Title } from './MovieList.styled';
 export default function MovieList({ movies, location, title }) {
   return (
     <>
-      {movies && (
-        <>
-          {!!title.length && <Title>{title}</Title>}
+      {!!title.length && <Title>{title}</Title>}
+      <>
+        {!!movies.length && (
           <ul>
             {movies.map(movie => (
               <li key={movie.id}>
@@ -17,8 +17,8 @@ export default function MovieList({ movies, location, title }) {
               </li>
             ))}
           </ul>
-        </>
-      )}
+        )}
+      </>
     </>
   );
 }

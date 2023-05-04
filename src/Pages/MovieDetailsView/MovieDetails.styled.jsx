@@ -13,10 +13,6 @@ export const Column = styled.div`
   padding: 16px 0;
 `;
 
-export const List = styled.ul`
-  list-style-position: inside;
-`;
-
 export const BackLink = styled(Link)`
   display: inline-block;
   padding: 10px 20px;

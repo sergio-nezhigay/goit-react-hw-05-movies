@@ -10,8 +10,6 @@ import {
   ReviewText,
 } from './Reviews.styled';
 
-const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w154';
-
 export default function Reviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
@@ -19,10 +17,9 @@ export default function Reviews() {
 
   useEffect(() => {
     (async () => {
-      if (!movieId) setLoading(true);
+      setLoading(true);
       try {
         const { results } = await theMovieDbAPI.fetchReviews(movieId);
-        console.log('🚀 ~ file: Reviews.jsx:24 ~ results:', results);
         setReviews(results);
       } catch (error) {
         console.log('Error fetching cast', error.message);
@@ -34,18 +31,23 @@ export default function Reviews() {
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
-      {reviews.length ? (
-        <ReviewList>
-          {reviews.map(review => (
-            <ReviewItem key={review.id}>
-              <ReviewAuthor>{review.author}</ReviewAuthor>
-              <ReviewText>{review.content}</ReviewText>
-            </ReviewItem>
-          ))}
-        </ReviewList>
+      {isLoading ? (
+        <div>Loading reviews...</div>
       ) : (
-        <p>We don't have any reviews for this movie</p>
+        <>
+          {reviews.length ? (
+            <ReviewList>
+              {reviews.map(review => (
+                <ReviewItem key={review.id}>
+                  <ReviewAuthor>{review.author}</ReviewAuthor>
+                  <ReviewText>{review.content}</ReviewText>
+                </ReviewItem>
+              ))}
+            </ReviewList>
+          ) : (
+            <p>We don't have any reviews for this movie</p>
+          )}
+        </>
       )}
     </>
   );

@@ -45,7 +45,7 @@ export const searchReviews = async query => {
   try {
     const response = await axiosConfig.get(`/search/movie`, {
       params: {
-        query: 'test',
+        query,
       },
     });
     const { results } = response.data;

@@ -26,11 +26,15 @@ export default function Home() {
 
   return (
     <>
-      <MovieList
-        movies={movies}
-        location={location}
-        title={'Trending movies'}
-      />
+      {isLoading ? (
+        <div>Loading movies...</div>
+      ) : (
+        <MovieList
+          movies={movies}
+          location={location}
+          title={'Trending movies'}
+        />
+      )}
     </>
   );
 }

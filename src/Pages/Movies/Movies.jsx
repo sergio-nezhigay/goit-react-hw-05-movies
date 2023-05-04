@@ -42,7 +42,7 @@ export default function Movies() {
       <MovieList
         movies={movies}
         location={location}
-        title={`Search results by word "${query}"`}
+        title={query ? `Search results by word "${query}"` : `Enter your query`}
       />
     </div>
   );
