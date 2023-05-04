@@ -54,3 +54,21 @@ export const searchReviews = async query => {
     throw new Error(`Error fetching movies: ${error.message}`);
   }
 };
+
+export const fetchTrailer = async movie_id => {
+  try {
+    const response = await axiosConfig.get(`/movie/${movie_id}/videos`);
+    const { results } = response.data;
+
+    const trailer = results.find(result => result.type === 'Trailer');
+
+    if (trailer) {
+      const trailerUrl = `https://www.youtube.com/embed/${trailer.key}?autoplay=1&controls=0`;
+      return trailerUrl;
+    } else {
+      throw new Error('No trailer found');
+    }
+  } catch (error) {
+    throw new Error(`Error fetching trailer: ${error.message}`);
+  }
+};
