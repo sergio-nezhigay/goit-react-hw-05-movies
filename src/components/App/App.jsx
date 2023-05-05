@@ -1,10 +1,9 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SharedLayout from '../SharedLayout/SharedLayout';
-import { Error404 } from '../../Pages/Error404/Error404';
 
 const Home = lazy(() => import('../../Pages/HomeView/HomeView'));
-// const Error404 = lazy(() => import('../../Pages/Error404/Error404'));
+const Error404 = lazy(() => import('../../Pages/Error404/Error404'));
 const MovieDetailsView = lazy(() =>
   import('Pages/MovieDetailsView/MovieDetailsView')
 );

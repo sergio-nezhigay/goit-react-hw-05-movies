@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ErrorTitle, ErrorText } from './Error404.styled';
 
-export function Error404() {
+export default function Error404() {
   return (
     <div>
       <ErrorTitle>404</ErrorTitle>
