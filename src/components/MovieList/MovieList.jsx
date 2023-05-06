@@ -8,15 +8,9 @@ export default function MovieList({ movies, location, title }) {
   const [trailer, setTrailer] = useState(null);
 
   const handleMovieHover = async movieId => {
-    try {
-      const video = await theMovieDbAPI.fetchTrailer(movieId);
-      if (video) {
-        setTrailer({ video, movieId });
-      }
-    } catch (error) {
-      console.error(
-        `Error fetching trailer for movie ${movieId}: ${error.message}`
-      );
+    const video = await theMovieDbAPI.fetchTrailer(movieId);
+    if (video) {
+      setTrailer({ video, movieId });
     }
   };
 

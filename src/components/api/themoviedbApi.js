@@ -36,6 +36,6 @@ export const fetchTrailer = async movie_id => {
   if (trailer) {
     return `https://www.youtube.com/embed/${trailer.key}?autoplay=1&controls=0`;
   } else {
-    throw new Error('No trailer found');
+    return '';
   }
 };
